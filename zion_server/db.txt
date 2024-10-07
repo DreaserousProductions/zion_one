@@ -1,0 +1,110 @@
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql-container
+
+CREATE TABLE registered_accounts (
+  email VARCHAR(255) NOT NULL,
+  acc_type int NOT NULL
+);
+
+INSERT INTO registered_accounts VALUES ("cs22@nitpy.ac.in", 1);
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE announcements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    posted_date DATE,
+    announ TEXT
+);
+
+INSERT INTO announcements (posted_date, announ) VALUES ("2024-08-05", "Hello, there"), ("2024-08-05", "Hello, new guy");
+INSERT INTO announcements (posted_date, announ) VALUES ("2024-08-05", "Dreaserous God"), ("2024-08-05", "Supreme power of justice will be bestowed upon thy in the world of oz pandemic. May you be blessed by the aura of god.");
+
+INSERT INTO announcements (posted_date, announ) VALUES 
+('2024-08-05', 'Due to maintenance work, the cafeteria will be closed on 2024-08-07 from 8:00 AM to 1:00 PM. Please plan accordingly.'),
+('2024-08-10', 'We are introducing a new dessert option this week: Chocolate Mousse. Available daily during dinner.'),
+('2024-08-15', 'Special Independence Day menu on 2024-08-15! Enjoy a variety of traditional dishes at lunch.'),
+('2024-08-20', 'Reminder: Please provide feedback on our new menu items. Your input helps us improve our offerings.');
+
+CREATE TABLE meals (
+    day varchar(20),
+    meal varchar(20),
+    items text
+);
+
+INSERT INTO meals VALUES
+('Sunday', 'Breakfast', 'POORI, POTATO MASLA, POHA'),
+('Sunday', 'Lunch', 'MUSHROOM BRIYANI, RAITHA, MEALMAKER GRAVY, CURD RICE, FRUIT CUSTARD'),
+('Sunday', 'Snacks', 'SWEET CORN/VEGPUFF'),
+('Sunday', 'Dinner', 'PAROTA(3) CHICKEN KURUMA(NV) PANNER CURRY(V) BADUSHA'),
+('Monday', 'Breakfast', 'CORN FLAKES, IDLY, VADACURRY, SEMIYA KICHADY, COCONUT CHUTNEY, BOILED EGG(NV), BANANA(VEG)'),
+('Monday', 'Lunch', 'POORI, CHANNA MASALA, SAMBAR, MIXED VEG PORIYAL, KESARI'),
+('Monday', 'Snacks', 'SAMOSA (1)'),
+('Monday', 'Dinner', 'CHAPATHI, TOMATTO DAL, PEAS PULAV, KADAI PANNER, GULLAB JAMUN'),
+('Tuesday', 'Breakfast', 'VEN PONGAL, BIG VADA (1), SAMBAR, COCONUT CHUTNEY, T.BREAD (4)'),
+('Tuesday', 'Lunch', 'CHAPATHI TOOR DAL, RICE, VATHAKULAMBU/MORKULAMBU KOOTTU (CHOW/SNAKE GOURD/BOTTLE GOURD/KEERAI), LADDO'),
+('Tuesday', 'Snacks', 'SAMBAR VADA (1)'),
+('Tuesday', 'Dinner', 'CHAPATHI, VEG GRAVY, VEG BRIYANI, RAITHA BOILED EGG(NV), MEALMAKER DRY(V)'),
+('Wednesday', 'Breakfast', 'UGGANI/PUTTU, POTTUKADALAI POWDER, UPMA, COCONUT CHUTNEY, BLACK CHANNA GRAVY'),
+('Wednesday', 'Lunch', 'KUSHKA, PEPPER CHICKEN, PANNER GRAVY RAITHA, RICE RASAM BREAD HALWA'),
+('Wednesday', 'Snacks', 'GROUNDNUT'),
+('Wednesday', 'Dinner', 'CHAPATHI, CHANNA MASALA, FRIED RICE, POTATO FRY'),
+('Thursday', 'Breakfast', 'MASALA DOSA/OINON DOSA, SAMBAR, VADA, TOMATO CHUTNEY, BANANA'),
+('Thursday', 'Lunch', 'CHAPATHI, PEAS GRAVY/DHAL, JEERA RICE, KOVAKAI/LADIES FINGER/KARAMANI MASALA, SWEET PONGAL'),
+('Thursday', 'Snacks', 'BAJJI/CUTLET'),
+('Thursday', 'Dinner', 'PODI UTTAPAM/ONION UTTAPAM, SAMBAR, COCONUT CHUTNEY, ICE CERAM'),
+('Friday', 'Breakfast', 'ALOO PARATHA(2), ONION RAITHA, RAVA UPPUMA, MINT CHUTNEY'),
+('Friday', 'Lunch', 'CHAPATHI, KADAI VEG, KEERAI SAMBAR, POTATO/BRINJAL PORIYAL, SEMIYA PAYASAM'),
+('Friday', 'Snacks', 'ONION PAKODA'),
+('Friday', 'Dinner', 'KUSHKA, MEALMAKER PEPPER GRAVY, RAITHA, HOT BADAM MILK, BOILED EGG(NV), BANANA(VEG)'),
+('Saturday', 'Breakfast', 'PLAIN DOSA, RAVA UPPUMA, SAMBAR, GROUNDNUT CHUTNEY'),
+('Saturday', 'Lunch', 'CHAPATHI, RAJMA GRAVY, RICE, SAMBAR, POTATO PORIYAL, PINAPPLE KESARI'),
+('Saturday', 'Snacks', 'PAV BHAJI(2)'),
+('Saturday', 'Dinner', 'IDLY, SAMBAR, TOMATO CHUTNEY, SAMBAR SADHAM, GOBI 65');
+
+INSERT INTO meals VALUES
+('Sunday', 'Breakfast', 'POORI, POTATO MASLA'),
+('Sunday', 'Lunch', 'LEMON RICE, CURD RICE, POTATO PORIYAL, MEALMAKER GRAVY'),
+('Sunday', 'Snacks', 'GROUNDNUT'),
+('Sunday', 'Dinner', 'CHICKEN BIRIYANI(NV) PANNER BIRIYANI(V) PLAIN GRAVY, FRUIT CUSTARD'),
+('Monday', 'Breakfast', 'CORN FLAKES, IDLY, VADACURRY, COCONUT CHUTNEY, BOILED EGG(NV), BANANA(VEG)'),
+('Monday', 'Lunch', 'POORI, CHANNA MASALA, SAMBAR, MIXED VEG PORIYAL, KESARI'),
+('Monday', 'Snacks', 'SAMOSA (1)'),
+('Monday', 'Dinner', 'CHAPATHI, TOMATTO DAL, PEAS PULAV, KADAI PANNER, GULLAB JAMUN'),
+('Tuesday', 'Breakfast', 'VEN PONGAL, BIG VADA (1), SAMBAR, COCONUT CHUTNEY, T.BREAD (4)'),
+('Tuesday', 'Lunch', 'CHAPATHI ,TOOR DAL, RICE, VATHAKULAMBU/MORKULAMBU ,(KOOTTU CHOW/SNAKE GOURD/BOTTLE GOURD/KEERAI), LADDO'),
+('Tuesday', 'Snacks', 'SAMBAR VADA (1)'),
+('Tuesday', 'Dinner', 'CHAPATHI, VEG GRAVY, VEG BRIYANI, RAITHA, BOILED EGG(NV), MEALMAKER DRY(V)'),
+('Wednesday', 'Breakfast', 'IDLY, VADA, SAMBAR, CHUTNEY'),
+('Wednesday', 'Lunch', 'KUSHKA, PEPPER CHICKEN, PEAS GRAVY, RAITHA, RICE, RASAM, BREAD HALWA, GOBI 65'),
+('Wednesday', 'Snacks', 'CHANNA SUNDAL'),
+('Wednesday', 'Dinner', 'CHAPATHI, CHANNA MASALA, FRIED RICE, POTATO FRY'),
+('Thursday', 'Breakfast', 'MASALA DOSA/ONION DOSA, SAMBAR, TOMATO CHUTNEY, BANANA'),
+('Thursday', 'Lunch', 'CHAPATHI, BOILED EGG, GRAVY(VEG) DHAL,JEERA RICE, KOVAKAI/LADIES FINGER/KARAMANI MASALA'),
+('Thursday', 'Snacks', 'SWEETCORN'),
+('Thursday', 'Dinner', 'PODI UTTAPAM/ONION UTTAPAM, SAMBAR, COCONUT CHUTNEY, ICE CERAM'),
+('Friday', 'Breakfast', 'ALOO PARATHA(2), ONION RAITHA, RAVA UPPUMA, MINT CHUTNEY'),
+('Friday', 'Lunch', 'CHAPATHI, KADAI VEG, KEERAI SAMBAR, POTATO,BRINJAL PORIYAL, SEMIYA PAYASAM'),
+('Friday', 'Snacks', 'KARAMANI SUNDAL'),
+('Friday', 'Dinner', 'KUSHKA, MEALMAKER PEPPER GRAVY, RAITHA, HOT BADAM MILK, BOILED EGG(NV), BANANA(VEG)'),
+('Saturday', 'Breakfast', 'PLAIN DOSA, RAVA UPPUMA, SAMBAR, GROUNDNUT CHUTNEY'),
+('Saturday', 'Lunch', 'CHAPATHI, RAJMA GRAVY, RICE, SAMBAR, POTATO PORIYAL, PINAPPLE KESARI'),
+('Saturday', 'Snacks', 'PAV BHAJI(2)'),
+('Saturday', 'Dinner', 'IDLY, SAMBAR, TOMATO CHUTNEY, SAMBAR SADHAM, GOBI 65');
+
+CREATE TABLE user_meals (
+    meal_id int AUTO_INCREMENT PRIMARY KEY,
+    id int,
+    meal_date DATE,
+    day varchar(20),
+    meal varchar(20),
+    collected int,
+    rating int
+);
+
+ALTER TABLE user_meals AUTO_INCREMENT=1001;
+
+INSERT INTO user_meals (id, meal_date, day, meal, collected) VALUES (1, '2024-08-09', 'Friday', 'Lunch', 1);
+UPDATE user_meals SET rating = NULL WHERE meal_id = 1001;
