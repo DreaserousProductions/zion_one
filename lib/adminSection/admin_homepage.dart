@@ -3,6 +3,7 @@ import 'package:admin_mess_app/general_components/variable_sizes.dart';
 import 'package:flutter/material.dart';
 import 'announcement_page.dart';
 import 'meal_served_page.dart';
+import 'update_menu.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -95,7 +96,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   text: "Update Menu",
                   color: paletteRed,
                   onPressed: () {
-                    // Add the action for this button here
+                                        Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UpdateMenuPage()),
+                                        );
                   },
                 ),
               ],
