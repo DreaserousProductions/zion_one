@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'announcement_page.dart';
 import 'meal_served_page.dart';
 import 'update_menu.dart';
+import 'rating.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -87,8 +88,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   icon: Icons.star,
                   text: "Ratings and review",
                   color: paletteRed,
-                  onPressed: () {
-                    // Add the action for this button here
+                  onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RatingsAndReviewsPage()),
+                    );
                   },
                 ),
                 CustomButton(
