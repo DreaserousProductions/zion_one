@@ -1,10 +1,10 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zion_one/general_components/palette.dart';
-import 'package:zion_one/general_components/variable_sizes.dart';
+import 'package:admin_mess_app/general_components/palette.dart';
+import 'package:admin_mess_app/general_components/variable_sizes.dart';
 import 'package:flutter/material.dart';
 import 'announcement_page.dart';
 import 'meal_served_page.dart';
 import 'update_menu.dart';
+import 'rating.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -14,50 +14,44 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _AdminHomePageState extends State<AdminHomePage> {
-  Future<void> _logout() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isSignedIn', false); // Default to false if not set
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "NITPY Cafeteria",
-          style: TextStyle(
-            fontFamily: "Zilla Slab SemiBold",
-            fontSize: (28 * screenFactor),
-            color: paletteLight,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            color: paletteLight,
-            onPressed: () {
-              _logout();
-              Navigator.pushReplacementNamed(context, "/");
-            },
-          ),
-        ],
-        backgroundColor: paletteDark,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
-          ),
-        ),
-      ),
+            appBar: AppBar(
+              title: Text(
+                "NITPY Cafeteria",
+                style: TextStyle(
+                  fontFamily: "ZillaSlabSemiBold",
+                  fontSize: (28 * screenFactor),
+                  color: paletteLight,
+                ),
+              ),
+              centerTitle: true,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.logout),
+                  color: paletteLight,
+                  onPressed: () {
+                  //  _logout();
+                    Navigator.pushReplacementNamed(context, "/");
+                  },
+                ),
+              ],
+              backgroundColor: paletteDark,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+            ),
       body: Stack(
         children: [
           // Background image
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    "assets/splash_screen/final_bg.png"), // Add your background image here
+                image: AssetImage('assets/image.png'), // Add your background image here
                 fit: BoxFit.cover,
               ),
             ),
@@ -75,8 +69,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     // Navigate to announcement page when button is pressed
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => AnnouncementPage()),
+                      MaterialPageRoute(builder: (context) => AnnouncementPage()),
                     );
                   },
                 ),
@@ -85,11 +78,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   text: "Number of meals served",
                   color: paletteRed,
                   onPressed: () {
-                    Navigator.push(
+                                        Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              MealsServedPage()), // Navigate to the new page
+                      MaterialPageRoute(builder: (context) => MealsServedPage()), // Navigate to the new page
                     );
                   },
                 ),
@@ -97,8 +88,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   icon: Icons.star,
                   text: "Ratings and review",
                   color: paletteRed,
-                  onPressed: () {
-                    // Add the action for this button here
+                  onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RatingsAndReviewsPage()),
+                    );
                   },
                 ),
                 CustomButton(
@@ -106,10 +99,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   text: "Update Menu",
                   color: paletteRed,
                   onPressed: () {
-                    Navigator.push(
+                                        Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => UpdateMenuPage()),
-                    );
+                                        );
                   },
                 ),
               ],
@@ -127,11 +120,7 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-  CustomButton(
-      {required this.icon,
-      required this.text,
-      required this.color,
-      required this.onPressed});
+  CustomButton({required this.icon, required this.text, required this.color, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -142,21 +131,21 @@ class CustomButton extends StatelessWidget {
         height: 70,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: color,
+            backgroundColor: color, 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
           ),
-          onPressed: onPressed,
+          onPressed: onPressed, 
           child: Row(
             children: [
               Icon(icon, size: 30, color: paletteLight),
               SizedBox(width: 20),
               Text(
                 text,
-                style: TextStyle(
-                  fontFamily: 'Zilla Slab',
-                  fontSize: 18 * screenFactor,
+                style:  TextStyle(
+                  fontFamily: 'ZillaSlab',
+                  fontSize: 20 * screenFactor,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -168,8 +157,8 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
-// import 'package:zion_one/general_components/palette.dart';
-// import 'package:zion_one/general_components/variable_sizes.dart';
+// import 'package:admin_mess_app/general_components/palette.dart';
+// import 'package:admin_mess_app/general_components/variable_sizes.dart';
 // import 'package:flutter/material.dart';
 // import 'announcement_page.dart';
 

@@ -1,31 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:zion_one/general_components/palette.dart';
-import 'package:zion_one/general_components/variable_sizes.dart';
+import 'package:admin_mess_app/general_components/palette.dart';
+import 'package:admin_mess_app/general_components/variable_sizes.dart';
+import 'package:intl/intl.dart';
 
-class MealsServedPage extends StatelessWidget {
+class MealsServedPage extends StatefulWidget {
+  @override
+  _MealsServedPageState createState() => _MealsServedPageState();
+}
+
+class _MealsServedPageState extends State<MealsServedPage> {
+  DateTime _selectedDate = DateTime.now();
+
+  // Sample data for meals served on specific dates
+  final Map<DateTime, Map<String, int>> mealsDataByDate = {
+    DateTime(2024, 11, 2): {'BREAKFAST': 150, 'LUNCH': 200, 'SNACKS': 250, 'DINNER': 200},
+    DateTime(2024, 11, 3): {'BREAKFAST': 180, 'LUNCH': 220, 'SNACKS': 300, 'DINNER': 210},
+    DateTime(2024, 11, 4): {'BREAKFAST': 160, 'LUNCH': 210, 'SNACKS': 270, 'DINNER': 230},
+  };
+
+  // Method to format date
+  String get formattedDate => DateFormat('dd/MM/yy').format(_selectedDate);
+  String get dayOfWeek => DateFormat('EEEE').format(_selectedDate);
+
+  // Get meals data for the selected date, or default values if date not present
+  Map<String, int> get mealsServedForDate {
+    return mealsDataByDate[_selectedDate] ?? {'BREAKFAST': 0, 'LUNCH': 0, 'SNACKS': 0, 'DINNER': 0};
+  }
+
   @override
   Widget build(BuildContext context) {
+    Map<String, int> mealsServed = mealsServedForDate;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "NITPY Cafeteria",
           style: TextStyle(
-            fontFamily: "Zilla Slab SemiBold",
-            fontSize: (28 * screenFactor),
+            fontFamily: "ZillaSlabSemiBold",
+            fontSize: 28 * screenFactor,
             color: paletteLight,
           ),
         ),
         centerTitle: true,
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.logout),
-        //     color: paletteLight,
-        //     onPressed: () {
-        //     //  _logout();
-        //       Navigator.pushReplacementNamed(context, "/");
-        //     },
-        //   ),
-        // ],
         backgroundColor: paletteDark,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -40,8 +56,7 @@ class MealsServedPage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    'assets/image.png'), // Add your background image here
+                image: AssetImage('assets/image.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -53,7 +68,7 @@ class MealsServedPage extends StatelessWidget {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  "Friday",
+                  dayOfWeek,
                   style: TextStyle(
                     fontFamily: "ZillaSlab",
                     fontSize: 30,
@@ -62,7 +77,7 @@ class MealsServedPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "02/08/24",
+                  formattedDate,
                   style: TextStyle(
                     fontFamily: "ZillaSlabSemiBold",
                     fontSize: 18,
@@ -83,31 +98,41 @@ class MealsServedPage extends StatelessWidget {
                 MealsCard(
                   iconPath: 'assets/breakfast.png',
                   mealType: 'BREAKFAST',
-                  mealsServed: '150',
+                  mealsServed: mealsServed['BREAKFAST'].toString(),
                   backgroundColor: paletteRed,
                 ),
                 MealsCard(
                   iconPath: 'assets/lunch.png',
                   mealType: 'LUNCH',
-                  mealsServed: '200',
+                  mealsServed: mealsServed['LUNCH'].toString(),
                   backgroundColor: paletteRed,
                 ),
                 MealsCard(
                   iconPath: 'assets/coffee-break.png',
                   mealType: 'SNACKS',
-                  mealsServed: '250',
+                  mealsServed: mealsServed['SNACKS'].toString(),
                   backgroundColor: paletteRed,
                 ),
                 MealsCard(
                   iconPath: 'assets/dinner.png',
                   mealType: 'DINNER',
-                  mealsServed: '200',
+                  mealsServed: mealsServed['DINNER'].toString(),
                   backgroundColor: paletteRed,
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    // Optionally handle button click here
+                  onPressed: () async {
+                    DateTime? newDate = await showDatePicker(
+                      context: context,
+                      initialDate: _selectedDate,
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2101),
+                    );
+                    if (newDate != null && newDate != _selectedDate) {
+                      setState(() {
+                        _selectedDate = newDate;
+                      });
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -117,7 +142,7 @@ class MealsServedPage extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    '02/08/24',
+                    formattedDate,
                     style: TextStyle(
                       fontFamily: "ZillaSlab",
                       color: Colors.white,
