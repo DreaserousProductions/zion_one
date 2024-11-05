@@ -14,11 +14,13 @@ class StartUpScreen extends StatefulWidget {
 
 class _StartUpScreenState extends State<StartUpScreen> {
   bool isSignedIn = false;
+  String emailOfUser = "";
 
   Future<void> _checkIfSignedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isSignedIn =
         prefs.getBool('isSignedIn') ?? false; // Default to false if not set
+    emailOfUser = prefs.getString("userEmail") ?? "";
   }
 
   @override
@@ -79,8 +81,13 @@ class _StartUpScreenState extends State<StartUpScreen> {
                       cafeWidth = MediaQuery.sizeOf(context).width;
                       cafeHeight = MediaQuery.sizeOf(context).height;
                       initVars();
-                      Navigator.pushReplacementNamed(context,
-                          isSignedIn ? "/studentHomePage" : "/register");
+                      Navigator.pushReplacementNamed(
+                          context,
+                          isSignedIn
+                              ? (emailOfUser == "admin@nitpy.ac.in")
+                                  ? "/adminHomePage"
+                                  : "/studentHomePage"
+                              : "/register");
                     },
                     tPaletteTomato,
                     paletteLight,

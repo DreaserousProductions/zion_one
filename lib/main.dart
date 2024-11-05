@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:zion_one/adminSection/admin_homepage.dart';
 
 import 'package:zion_one/onboarding/login.dart';
 import 'package:zion_one/onboarding/start_up_screen.dart';
@@ -21,6 +22,9 @@ void main() async {
       "/register": (context) => const Register(),
       "/login": (context) => const Login(),
       "/studentHomePage": (context) => const StudentHomePage(),
+
+      // Admin Imports
+      "/adminHomePage": (context) => const AdminHomePage(),
     },
   ));
 }

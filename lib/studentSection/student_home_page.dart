@@ -6,6 +6,7 @@ import 'package:zion_one/general_components/variable_sizes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:zion_one/studentSection/schedule_meals.dart';
 
 class StudentHomePage extends StatefulWidget {
   const StudentHomePage({super.key});
@@ -37,6 +38,9 @@ class _StudentHomePageState extends State<StudentHomePage> {
   final PageController _menuPageController =
       PageController(viewportFraction: 0.9);
   int currentMenu = 0;
+
+  // Display Schedule
+  bool displaySchedule = false;
 
   Future<void> _logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -519,7 +523,11 @@ class _StudentHomePageState extends State<StudentHomePage> {
                             "Previous Meals",
                           ),
                           generalOutlineButton(
-                            () {},
+                            () {
+                              setState(() {
+                                displaySchedule = !displaySchedule;
+                              });
+                            },
                             tPaletteGreen,
                             paletteDark,
                             0,
@@ -603,6 +611,38 @@ class _StudentHomePageState extends State<StudentHomePage> {
                         ],
                       ),
                     ),
+                  ),
+                )
+              : const SizedBox(
+                  height: 0,
+                  width: 0,
+                ),
+          displaySchedule
+              ? Scaffold(
+                  backgroundColor: tPaletteDark,
+                  body: Stack(
+                    children: [
+                      // This GestureDetector captures taps outside ScheduleMeals
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            displaySchedule = false; // Close the schedule
+                          });
+                        },
+                        child: Container(
+                          color: Colors.transparent, // Transparent background
+                        ),
+                      ),
+                      // Main content
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            // Prevent closing when tapping on ScheduleMeals
+                          },
+                          child: ScheduleMeals(),
+                        ),
+                      ),
+                    ],
                   ),
                 )
               : const SizedBox(

@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
 
       print(response.statusCode);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isSignedIn', true); // Set sign-in status
         await prefs.setString(
@@ -51,6 +51,9 @@ class _LoginState extends State<Login> {
       if (response.statusCode == 200) {
         // Login successful
         Navigator.pushReplacementNamed(context, "/studentHomePage");
+      } else if (response.statusCode == 201) {
+        // Login successful
+        Navigator.pushReplacementNamed(context, "/adminHomePage");
       } else {
         print(response.statusCode);
         // Handle error
